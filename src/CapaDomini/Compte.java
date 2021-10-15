@@ -1,0 +1,50 @@
+package CapaDomini;
+
+import java.util.Date;
+
+public class Compte {
+
+    public int numCompte;
+    public Date data_obertura;
+    public Date data_cancelacio;
+    public int saldo;
+    
+    public Compte(int numCompte,int quantitat,Date data_obertura){
+        
+    }
+    
+    public Compte(int numCompte,int quantitat,Date data_obertura,Date data_cancelacio){
+        
+    }
+    
+    public void setNumCompte(int numCompte){
+
+    }
+    
+    public void setDataObertura(Date data_obertura){
+        
+    }
+    
+    public void setDataCancelacio(Date data_cancelacio){
+        
+    }
+    
+    public void setSaldo(int saldo){
+        
+    }
+    
+    public boolean estasCancelat(){
+        
+        return true;
+    }
+    
+    public int getSaldo(){
+        
+        return -1;
+    }
+    
+    public String toString(){
+        
+        return null;
+    }
+}
