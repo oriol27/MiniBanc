@@ -1,6 +1,6 @@
 package CapaAplicacio;
 
-import CapaPersistencia.FacanaBBDD;
+import CapaPersistencia.*;
 
 public class CtrlAltaCompte {
 
@@ -14,7 +14,7 @@ public class CtrlAltaCompte {
     }
     
     public String Alta_Compte(String NIF,String Nom)throws Exception{
-        
+
        
             //Verificar camps no nulls:
 

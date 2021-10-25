@@ -1,11 +1,12 @@
 package CapaPresentacio;
 
-import CapaAplicacio.CtrlAltaCompte;
-import CapaAplicacio.CtrlCancelarCompte;
-import CapaAplicacio.CtrlExtracteMoviments;
-import CapaAplicacio.CtrlIngres;
-import CapaAplicacio.CtrlLlistarComptes;
-import CapaAplicacio.CtrlReintegrament;
+import CapaAplicacio.*;
+import CapaPersistencia.*;
+//import CapaAplicacio.CtrlCancelarCompte;
+//import CapaAplicacio.CtrlExtracteMoviments;
+//import CapaAplicacio.CtrlIngres;
+//import CapaAplicacio.CtrlLlistarComptes;
+//import CapaAplicacio.CtrlReintegrament;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -797,7 +798,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private void button1AltaCompteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1AltaCompteActionPerformed
         
         try{
-
            String res=this.ctrl_alta_compte.Alta_Compte(NIF_AltaCompte.getText(),Nom_AltaCompte.getText());
            JOptionPane.showMessageDialog(this, "Número del nou compte: "+res, "Número del nou compte", JOptionPane.INFORMATION_MESSAGE);
         

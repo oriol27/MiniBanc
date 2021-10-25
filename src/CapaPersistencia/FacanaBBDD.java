@@ -1,7 +1,7 @@
 package CapaPersistencia;
 
-import CapaDomini.Compte;
-import CapaDomini.Moviment;
+import CapaDomini.*;
+import CapaDomini.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
