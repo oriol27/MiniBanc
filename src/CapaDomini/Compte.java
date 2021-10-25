@@ -34,7 +34,9 @@ public class Compte {
     }
     
     public boolean estasCancelat(){
-        
+        if(data_cancelacio == null) {
+        	return false;
+        }
         return true;
     }
     

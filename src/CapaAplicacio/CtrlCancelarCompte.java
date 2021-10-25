@@ -1,5 +1,10 @@
 package CapaAplicacio;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+
+import CapaDomini.Compte;
+import CapaPersistencia.CompteBBDD;
 import CapaPersistencia.FacanaBBDD;
 
 public class CtrlCancelarCompte {
@@ -14,22 +19,31 @@ public class CtrlCancelarCompte {
     
     public void Cancelar_Compte(String NIF,String numCompte)throws Exception{
 
-            //Verificar camps no nulls:
-   
-
-            //Verificar lletra del NIF: 
-            
-           
-            //Verificar si existeix el Compte:
-            
-
-            //Verificar que el compte no estÃ  cancelÂ·lat:
-    
-            
-            //Verificar que el Compte pertany al NIF:
-
-           
+    	if(NIF.isEmpty() || numCompte.isEmpty()) { //Comprova si hi ha valors nulls
+			System.out.println("Hi ha valors nulls");
+			
+		}else if(!NIF.matches("^\\d{1}[A-Z]{8}")) { //Comprova si el NIF esta en fomrat de DNI
+			System.out.println("El NIF no está ben escrit");
+			
+		}else {
+			Compte compte = CompteBBDD.existeixCompteBBDD(numCompte); //Comprova si la compta existeix, si es aixi la retorna
+			if(compte == null){
+				System.out.println("No existeix aquesta compte");
+				
+			}else {	
+				if(compte.estasCancelat() == true) { //Comprova si la compta ja esta cancelada
+					System.out.println("Aquesta compta ya esta cancelada");
+					
+				}else {
+					if(!CompteBBDD.verificarCompteBBDD(NIF, numCompte)) { //Verifica que la compta pertanyi a aquesta persona
+						System.out.println("Aquesta compta no pertany a aquesta persona");
+						
+					}else {
+						CompteBBDD.cancelarCompteBBDD(numCompte); //Si tot esta bé, es cancela la compte
+					}
+				}
+			}
         }
-
     }
+}
 

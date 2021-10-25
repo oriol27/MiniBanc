@@ -12,7 +12,7 @@ public class CompteBBDD {
         
     }
     
-    public Compte existeixCompteBBDD(String numCompte)throws Exception{
+    public static Compte existeixCompteBBDD(String numCompte)throws Exception{
          
         return null;
     }
@@ -32,7 +32,7 @@ public class CompteBBDD {
         
     }
     
-    public boolean verificarCompteBBDD(String NIF, String numCompte) throws Exception{
+    public static boolean verificarCompteBBDD(String NIF, String numCompte) throws Exception{
         
         //Verificar que el compte és del NIF:
         
@@ -40,7 +40,7 @@ public class CompteBBDD {
 
     }
     
-    public void cancelarCompteBBDD(String numCompte) throws Exception {
+    public static void cancelarCompteBBDD(String numCompte) throws Exception {
         
     }
     
