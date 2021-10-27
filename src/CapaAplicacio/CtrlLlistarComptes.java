@@ -1,6 +1,6 @@
 package CapaAplicacio;
 
-import CapaPersistencia.FacanaBBDD;
+import CapaPersistencia.*;
 import java.util.ArrayList;
 
 

@@ -1,7 +1,7 @@
 package CapaAplicacio;
 
-import CapaDomini.Compte;
-import CapaPersistencia.FacanaBBDD;
+import CapaDomini.*;
+import CapaPersistencia.*;
 import java.util.ArrayList;
 
 public class CtrlExtracteMoviments {
