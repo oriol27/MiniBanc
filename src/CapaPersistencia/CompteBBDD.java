@@ -1,8 +1,13 @@
 package CapaPersistencia;
 
 import CapaDomini.Compte;
+import utils.utils;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -13,7 +18,7 @@ public class CompteBBDD {
     }
     
     public static Compte existeixCompteBBDD(String numCompte)throws Exception{
-         
+        
         return null;
     }
     
@@ -33,10 +38,23 @@ public class CompteBBDD {
     }
     
     public static boolean verificarCompteBBDD(String NIF, String numCompte) throws Exception{
-        
-        //Verificar que el compte és del NIF:
-        
-        return false;
+    	CallableStatement statement = null;
+    	ResultSet rs = null;
+    	boolean verificacio = false;
+        try {
+        	Connection conexio = BBDD.getConnexio();
+        	statement = conexio.prepareCall("{call verificarCompte(?, ?)}");
+			statement.setString(1, NIF);
+			statement.setString(2, numCompte);
+			rs = statement.executeQuery();
+			rs.next();
+			verificacio = rs.getBoolean(1);
+		}catch(SQLException e){
+			System.out.println("Error sql: "+e.getMessage());
+		} finally {
+			statement.close();
+        }
+        return verificacio;
 
     }
     
