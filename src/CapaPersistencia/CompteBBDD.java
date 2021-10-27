@@ -50,7 +50,7 @@ public class CompteBBDD {
 			rs.next();
 			verificacio = rs.getBoolean(1);
 		}catch(SQLException e){
-			System.out.println("Error sql: "+e.getMessage());
+			System.out.println("Error sql: "+e.getMessage()); //
 		} finally {
 			statement.close();
         }

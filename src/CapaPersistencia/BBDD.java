@@ -9,7 +9,7 @@ public class BBDD {
 
     private static Connection connexio;
     private final String DNS = "MiniBanc";
-    private static BBDD instancia;
+    private static BBDD instancia; //
     
     public BBDD()throws Exception {
        
