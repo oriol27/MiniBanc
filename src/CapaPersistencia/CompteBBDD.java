@@ -16,7 +16,7 @@ public class CompteBBDD {
         
     }
     
-    public Compte existeixCompteBBDD(String numCompte)throws Exception{
+    public static Compte existeixCompteBBDD(String numCompte)throws Exception{
         Compte compte = null;
         PreparedStatement statement = null;
         try{
@@ -40,23 +40,19 @@ public class CompteBBDD {
         return compte;
     }
     
-    public int introCompteBBDD(String NIF) throws Exception{
+    public static int introCompteBBDD(String NIF) throws Exception{
         int numCompte = 0;
-        PreparedStatement statement = null;
-        try{
-            conn = BBDD.getInstacia().getConnexio();
-            statement = conn.prepareCall("{call createCompte(?)}");
-            statement.setString(1, NIF);
+        try (Connection conn = BBDD.getConnexio();
+             PreparedStatement pstmt = conn.prepareStatement("{call createCompte(?)}");){
+            pstmt.setString(1, NIF);
+            ResultSet rs = pstmt.executeQuery();
 
-            ResultSet rs = statement.executeQuery();
             if(rs.next()) {
                 numCompte = rs.getInt(1);
             }
+
         }catch(SQLException e){
-            System.out.print("Error de connexió");
-        } finally {
-            statement.close();
-            conn.close();
+            e.printStackTrace();
         }
         return numCompte;
     }
