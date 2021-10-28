@@ -19,16 +19,16 @@ public class CompteBBDD {
         
     }
     
-    public static Compte existeixCompteBBDD(String numCompte)throws Exception {
+    public Compte existeixCompteBBDD(String numCompte)throws Exception{
         PreparedStatement statement = null;
         Compte compte = new Compte();
-        try {
-            conn = BBDD.getConnexio();
+        try (Connection conn = BBDD.getInstacia().getConnexio()){
+
             statement = conn.prepareCall("{call dadesCompte(?)}");
             statement.setString(1, numCompte);
             ResultSet rs = statement.executeQuery();
 
-            if (rs.next()) {
+            if (rs.next()){
                 System.out.println(rs.getString("data_obertura"));
                 compte.numCompte = rs.getString("numCompte");
                 compte.data_obertura = rs.getDate("data_obertura");
@@ -39,14 +39,13 @@ public class CompteBBDD {
             System.out.print("Error de connexió");
         } finally {
             statement.close();
-            conn.close();
         }
         return compte;
     }
     
-    public static String introCompteBBDD(String NIF) throws Exception{
+    public String introCompteBBDD(String NIF) throws Exception{
         String numCompte = "";
-        try (Connection conn = BBDD.getConnexio();
+        try (Connection conn = BBDD.getInstacia().getConnexio();
              CallableStatement cs = conn.prepareCall("{? = call createCompte(?)}");){
             cs.registerOutParameter(1, Types.VARCHAR);
             cs.setString(2, NIF);
@@ -112,7 +111,7 @@ public class CompteBBDD {
     
     public ArrayList<Compte> Llistar_Comptes(String NIF)throws Exception{
         ArrayList<Compte> compte = new ArrayList<Compte>();
-        try (Connection conn = BBDD.getConnexio();
+        try (Connection conn = BBDD.getInstacia().getConnexio();
              PreparedStatement pstmt = conn.prepareStatement("select * from Compte where dni='"+NIF+"'");) {
             ResultSet rs = pstmt.executeQuery();
             Compte compte_selecionat = new Compte(rs.getString(1), Integer.parseInt(rs.getString(4)) ,rs.getDate(2),rs.getDate(3));
