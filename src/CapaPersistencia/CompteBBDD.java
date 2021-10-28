@@ -20,18 +20,20 @@ public class CompteBBDD {
     }
     
     public static Compte existeixCompteBBDD(String numCompte)throws Exception{
-        Compte compte = new Compte();
         PreparedStatement statement = null;
+        Compte compte = new Compte();
         try{
             conn = BBDD.getConnexio();
             statement = conn.prepareCall("{call dadesCompte(?)}");
             statement.setString(1, numCompte);
             ResultSet rs = statement.executeQuery();
-            if(rs.next()) {
-                compte.numCompte = rs.getString(1);
-                compte.data_obertura = rs.getDate(2);
-                compte.data_cancelacio = rs.getDate(3);
-                compte.saldo = rs.getInt(4);
+
+            if (rs.next()){
+                System.out.println(rs.getString("data_obertura"));
+                compte.numCompte = rs.getString("numCompte");
+                compte.data_obertura = rs.getDate("data_obertura");
+                compte.data_cancelacio = rs.getDate("data_cancelacio");
+                compte.saldo = rs.getInt("saldo");
             }
         }catch(SQLException e){
             System.out.print("Error de connexió");
