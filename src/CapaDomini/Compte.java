@@ -13,11 +13,13 @@ public class Compte {
 
     }
 
-    public Compte(int numCompte,int quantitat,Date data_obertura){
-        
+    public Compte(String numCompte,int quantitat,Date data_obertura){
+        this.numCompte = numCompte;
+        this.saldo = quantitat;
+        this.data_obertura = data_obertura;
     }
     
-    public Compte(int numCompte,int quantitat,Date data_obertura,Date data_cancelacio){
+    public Compte(String numCompte,int quantitat,Date data_obertura,Date data_cancelacio){
         
     }
     
@@ -48,9 +50,14 @@ public class Compte {
         
         return -1;
     }
-    
-    public String toString(){
-        
-        return null;
+
+    @Override
+    public String toString() {
+        return "Compte{" +
+                "numCompte='" + numCompte + '\'' +
+                ", data_obertura=" + data_obertura +
+                ", data_cancelacio=" + data_cancelacio +
+                ", saldo=" + saldo +
+                '}';
     }
 }

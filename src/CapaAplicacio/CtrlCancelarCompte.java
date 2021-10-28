@@ -24,10 +24,15 @@ public class CtrlCancelarCompte {
 			
 		}else if(!NIF.matches("^\\d{1}[A-Z]{8}")) { //Comprova si el NIF esta en fomrat de DNI
 			System.out.println("El NIF no está ben escrit");
-			
 		}else {
 			Compte compte = CompteBBDD.existeixCompteBBDD(numCompte); //Comprova si la compta existeix, si es aixi la retorna
-			if(compte == null){
+			String compteNull = "Compte{" +
+					"numCompte='" + null + '\'' +
+					", data_obertura=" + null +
+					", data_cancelacio=" + null +
+					", saldo=" + 0 +
+					'}';
+			if(compte.toString().equals(compteNull)){
 				System.out.println("No existeix aquesta compte");
 				
 			}else {	
