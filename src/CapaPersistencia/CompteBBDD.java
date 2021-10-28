@@ -2,10 +2,7 @@ package CapaPersistencia;
 
 import CapaDomini.Compte;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -17,16 +14,15 @@ public class CompteBBDD {
     }
     
     public static Compte existeixCompteBBDD(String numCompte)throws Exception{
-        Compte compte = null;
+        Compte compte = new Compte();
         PreparedStatement statement = null;
         try{
-            conn = BBDD.getInstacia().getConnexio();
+            conn = BBDD.getConnexio();
             statement = conn.prepareCall("{call dadesCompte(?)}");
             statement.setString(1, numCompte);
-
             ResultSet rs = statement.executeQuery();
             if(rs.next()) {
-                compte.numCompte = rs.getInt(1);
+                compte.numCompte = rs.getString(1);
                 compte.data_obertura = rs.getDate(2);
                 compte.data_cancelacio = rs.getDate(3);
                 compte.saldo = rs.getInt(4);
@@ -40,16 +36,14 @@ public class CompteBBDD {
         return compte;
     }
     
-    public static int introCompteBBDD(String NIF) throws Exception{
-        int numCompte = 0;
+    public static String introCompteBBDD(String NIF) throws Exception{
+        String numCompte = "";
         try (Connection conn = BBDD.getConnexio();
-             PreparedStatement pstmt = conn.prepareStatement("{call createCompte(?)}");){
-            pstmt.setString(1, NIF);
-            ResultSet rs = pstmt.executeQuery();
-
-            if(rs.next()) {
-                numCompte = rs.getInt(1);
-            }
+             CallableStatement cs = conn.prepareCall("{? = call createCompte(?)}");){
+            cs.registerOutParameter(1, Types.VARCHAR);
+            cs.setString(2, NIF);
+            cs.execute();
+            numCompte = cs.getString(1);
 
         }catch(SQLException e){
             e.printStackTrace();

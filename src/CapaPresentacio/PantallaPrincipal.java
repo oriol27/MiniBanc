@@ -666,7 +666,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 //jMenuItem1AltaCompteActionPerformed(evt);
                 try {
-                    System.out.println(CapaPersistencia.CompteBBDD.introCompteBBDD("123456789K"));
+                    System.out.println(CapaPersistencia.CompteBBDD.existeixCompteBBDD("2020-0000-11-9754992527"));
                     //CapaPersistencia.CompteBBDD.existeixCompteBBDD("2020-0000-11-1478546821");
                 } catch (Exception e) {
                     e.printStackTrace();
