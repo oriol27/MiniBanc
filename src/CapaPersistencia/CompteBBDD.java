@@ -2,6 +2,8 @@ package CapaPersistencia;
 
 import CapaDomini.Compte;
 
+import java.sql.*;
+
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,25 +13,51 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class CompteBBDD {
+    private static Connection conn = null;
 
     public CompteBBDD(){
         
     }
     
     public static Compte existeixCompteBBDD(String numCompte)throws Exception{
-        
+        Compte compte = new Compte();
+        PreparedStatement statement = null;
+        try{
+            conn = BBDD.getConnexio();
+            statement = conn.prepareCall("{call dadesCompte(?)}");
+            statement.setString(1, numCompte);
+            ResultSet rs = statement.executeQuery();
+            if(rs.next()) {
+                compte.numCompte = rs.getString(1);
+                compte.data_obertura = rs.getDate(2);
+                compte.data_cancelacio = rs.getDate(3);
+                compte.saldo = rs.getInt(4);
+            }
+        }catch(SQLException e){
+            System.out.print("Error de connexió");
+        } finally {
+            statement.close();
+            conn.close();
+        }
+        return compte;
+    public static Compte existeixCompteBBDD(String numCompte)throws Exception{
+
         return null;
     }
     
-    public int introCompteBBDD(String NIF) throws Exception{
+    public static String introCompteBBDD(String NIF) throws Exception{
+        String numCompte = "";
+        try (Connection conn = BBDD.getConnexio();
+             CallableStatement cs = conn.prepareCall("{? = call createCompte(?)}");){
+            cs.registerOutParameter(1, Types.VARCHAR);
+            cs.setString(2, NIF);
+            cs.execute();
+            numCompte = cs.getString(1);
 
-            //Introduïr el nou compte a la BBDD:
-
-            
-            //Agafar número de compte de la BBDD del nou compte i retornar-lo:
-            
-            return -1;
-        
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return numCompte;
     }
     
     public void augmentarSaldoBBDD(String numCompte,int quantitat_final)throws Exception{
