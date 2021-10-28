@@ -27,13 +27,11 @@ public class FacanaBBDD {
     }
     
     public void cancelarCompte(String numCompte) throws Exception{
-        
+        compteBBDD.cancelarCompteBBDD(numCompte);
     }
     
     public boolean verificarCompte(String NIF,String numCompte) throws Exception{
-        
-        return false;
-        
+        return compteBBDD.verificarCompteBBDD(NIF, numCompte);
     }
     
     public void introMoviment(String numCompte, Moviment m) throws Exception{
