@@ -40,11 +40,11 @@ public class CtrlCancelarCompte {
 					System.out.println("Aquesta compta ya esta cancelada");
 					
 				}else {
-					if(!CompteBBDD.verificarCompteBBDD(NIF, numCompte)) { //Verifica que la compta pertanyi a aquesta persona
+					if(!facana.verificarCompte(NIF, numCompte)) { //Verifica que la compta pertanyi a aquesta persona
 						System.out.println("Aquesta compta no pertany a aquesta persona");
 						
 					}else {
-						CompteBBDD.cancelarCompteBBDD(numCompte); //Si tot esta bé, es cancela la compte
+						facana.cancelarCompte(numCompte); //Si tot esta bé, es cancela la compte
 					}
 				}
 			}

@@ -63,7 +63,7 @@ public class CompteBBDD {
         
     }
     
-    public static boolean verificarCompteBBDD(String NIF, String numCompte) throws Exception{
+    public boolean verificarCompteBBDD(String NIF, String numCompte) throws Exception{
     	CallableStatement statement = null;//
     	ResultSet rs = null;
     	boolean verificacio = false;
@@ -85,7 +85,7 @@ public class CompteBBDD {
 
     }
     
-    public static void cancelarCompteBBDD(String numCompte) throws Exception {
+    public void cancelarCompteBBDD(String numCompte) throws Exception {
         PreparedStatement statement = null;
         try {
             conn = BBDD.getConnexio();
