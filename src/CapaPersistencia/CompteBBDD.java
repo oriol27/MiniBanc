@@ -1,7 +1,6 @@
 package CapaPersistencia;
 
 import CapaDomini.Compte;
-import utils.utils;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -38,7 +37,7 @@ public class CompteBBDD {
     }
     
     public static boolean verificarCompteBBDD(String NIF, String numCompte) throws Exception{
-    	CallableStatement statement = null;
+    	CallableStatement statement = null;//
     	ResultSet rs = null;
     	boolean verificacio = false;
         try {
