@@ -104,8 +104,14 @@ public class CompteBBDD {
     }
     
     public ArrayList<Compte> Llistar_Comptes(String NIF)throws Exception{
-     
-        return null;
+        ArrayList<Compte> compte = new ArrayList<Compte>();
+        try (Connection conn = BBDD.getConnexio();
+             PreparedStatement pstmt = conn.prepareStatement("select * from Compte where dni='"+NIF+"'");) {
+            ResultSet rs = pstmt.executeQuery();
+            Compte compte_selecionat = new Compte(rs.getString(1), Integer.parseInt(rs.getString(4)) ,rs.getDate(2),rs.getDate(3));
+            compte.add(compte_selecionat);
+            return compte;
+        }
     }
     
 }

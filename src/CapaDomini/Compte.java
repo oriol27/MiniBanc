@@ -20,25 +20,50 @@ public class Compte {
     }
     
     public Compte(String numCompte,int quantitat,Date data_obertura,Date data_cancelacio){
-        
+        this.data_obertura = data_obertura;
+        saldo = quantitat;
     }
     
-    public void setNumCompte(int numCompte){
+    public Compte(String numCompte,int quantitat,Date data_obertura,Date data_cancelacio){
+        this.numCompte = numCompte;
+        this.data_obertura = data_obertura;
+        saldo = quantitat;
+        this.data_cancelacio = data_cancelacio;
+        
+    }
 
+    public String getNumCompte() {
+        return numCompte;
     }
-    
-    public void setDataObertura(Date data_obertura){
-        
+
+    public Date getData_obertura() {
+        return data_obertura;
     }
-    
-    public void setDataCancelacio(Date data_cancelacio){
-        
+
+    public Date getData_cancelacio() {
+        return data_cancelacio;
     }
-    
-    public void setSaldo(int saldo){
-        
+    public int getSaldo(){
+
+        return -1;
     }
-    
+
+    public void setNumCompte(String numCompte) {
+        this.numCompte = numCompte;
+    }
+
+    public void setData_obertura(Date data_obertura) {
+        this.data_obertura = data_obertura;
+    }
+
+    public void setData_cancelacio(Date data_cancelacio) {
+        this.data_cancelacio = data_cancelacio;
+    }
+
+    public void setSaldo(int saldo) {
+        this.saldo = saldo;
+    }
+
     public boolean estasCancelat(){
         if(data_cancelacio == null) {
         	return false;
@@ -59,5 +84,8 @@ public class Compte {
                 ", data_cancelacio=" + data_cancelacio +
                 ", saldo=" + saldo +
                 '}';
+    public String toString(){
+        
+        return null;
     }
 }
