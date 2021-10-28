@@ -9,6 +9,7 @@ public class CtrlReintegrament {
       public CtrlReintegrament()throws Exception{
           
           //Crear nova Façana:
+          facana = new FacanaBBDD();
           
       }
       
@@ -16,10 +17,18 @@ public class CtrlReintegrament {
           
           
           //Verificar camps no nulls: 
-          
-          
+          if (NIF.isEmpty() || NIF == null || NIF.isBlank()) {
+              throw new IllegalArgumentException("El NIF no pot estar buit");
+          }
+          if (numCompte.isEmpty() || numCompte == null || numCompte.isBlank()) {
+              throw new IllegalArgumentException("El número de compte no pot estar buit");
+          }
+          if (Quantitat.isEmpty() || Quantitat == null || Quantitat.isBlank()) {
+              throw new IllegalArgumentException("La quantitat no pot estar buida");
+          }
+
           //Verificar lletra del NIF:
-            
+
             
           //Verificar que existeix el compte:
             
