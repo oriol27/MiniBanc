@@ -64,8 +64,6 @@ public class Compte {
         return true;
     }
     
-
-    
     public String toString(){
         
         return null;
