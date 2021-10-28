@@ -83,7 +83,7 @@ public class FacanaBBDD {
   
     }
 
-    public boolean comprovaLletraNIF(String NIF) {
+    public static boolean comprovaLletraNIF(String NIF) {
         int DNI = Integer.parseInt((NIF.substring(0,8)));
         int resta = 0;
         String lletra = "";
