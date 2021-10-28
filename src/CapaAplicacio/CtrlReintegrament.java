@@ -9,6 +9,7 @@ public class CtrlReintegrament {
       public CtrlReintegrament()throws Exception{
           
           //Crear nova Façana:
+          facana = new FacanaBBDD();
           
       }
       
