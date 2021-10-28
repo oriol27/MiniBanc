@@ -4,11 +4,15 @@ import java.util.Date;
 
 public class Compte {
 
-    public int numCompte;
+    public String numCompte;
     public Date data_obertura;
     public Date data_cancelacio;
     public int saldo;
-    
+
+    public Compte (){
+
+    }
+
     public Compte(int numCompte,int quantitat,Date data_obertura){
         
     }

@@ -11,29 +11,32 @@ public class BBDD {
     private final String DNS = "MiniBanc";
     private static BBDD instancia;
     
-    public BBDD()throws Exception {
-       
-   }
+    public BBDD() {
+        String url = "jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11446603";
+        String driver = "com.mysql.cj.jdbc.Driver";
+        String usuario = "sql11446603";
+        String password = "egTL9R7wLN";
+
+        try{
+            Class.forName(driver);
+            connexio = DriverManager.getConnection(url, usuario, password);
+            System.out.println("Conexió exitosa");
+        }
+        catch(ClassNotFoundException | SQLException e){
+            e.printStackTrace();
+        }
+    }
     
     public synchronized static BBDD getInstacia () throws Exception {
-        return null;
+        if (connexio == null){
+            instancia = new BBDD();
+            System.out.println("Entra a crear BBDD");
+        }
+        return instancia;
     }
 
     public static Connection getConnexio () throws Exception {
-        connexio = null;
-
-        try(FileInputStream f = new FileInputStream("C:\\Users\\noelia.LAPTOP-L8KTAHI7\\Documents\\MiniBancGit\\resources\\connection.properties")){
-            Properties pros = new Properties();
-            pros.load(f);
-
-            String url = pros.getProperty("url");
-            String user = pros.getProperty("user");
-            String password = pros.getProperty("password");
-
-            connexio = DriverManager.getConnection(url,user,password);
-        }catch(IOException e) {
-            System.out.println(e.getMessage());
-        }
-        return connexio;
+            getInstacia();
+            return connexio;
     }
 }
