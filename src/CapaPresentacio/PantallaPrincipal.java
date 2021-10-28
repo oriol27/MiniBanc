@@ -664,13 +664,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jMenuItem1AltaCompte.setText("Alta d'un compte");
         jMenuItem1AltaCompte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //jMenuItem1AltaCompteActionPerformed(evt);
-                try {
-                    System.out.println(CapaPersistencia.CompteBBDD.existeixCompteBBDD("2020-0000-11-9754992527"));
-                    //CapaPersistencia.CompteBBDD.existeixCompteBBDD("2020-0000-11-1478546821");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                jMenuItem1AltaCompteActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem1AltaCompte);
