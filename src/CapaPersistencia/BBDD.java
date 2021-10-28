@@ -18,7 +18,7 @@ public class BBDD {
         return instancia;
     }
 
-    public Connection getConnexio () throws Exception {
+    public static Connection getConnexio () throws Exception {
         String url = "jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11446603";
         String driver = "com.mysql.cj.jdbc.Driver";
         String usuario = "sql11446603";
