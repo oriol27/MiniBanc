@@ -3,6 +3,12 @@ package CapaPersistencia;
 import CapaDomini.Compte;
 
 import java.sql.*;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -13,21 +19,23 @@ public class CompteBBDD {
         
     }
     
-    public static Compte existeixCompteBBDD(String numCompte)throws Exception{
-        Compte compte = new Compte();
+    public static Compte existeixCompteBBDD(String numCompte)throws Exception {
         PreparedStatement statement = null;
-        try{
+        Compte compte = new Compte();
+        try {
             conn = BBDD.getConnexio();
             statement = conn.prepareCall("{call dadesCompte(?)}");
             statement.setString(1, numCompte);
             ResultSet rs = statement.executeQuery();
-            if(rs.next()) {
-                compte.numCompte = rs.getString(1);
-                compte.data_obertura = rs.getDate(2);
-                compte.data_cancelacio = rs.getDate(3);
-                compte.saldo = rs.getInt(4);
+
+            if (rs.next()) {
+                System.out.println(rs.getString("data_obertura"));
+                compte.numCompte = rs.getString("numCompte");
+                compte.data_obertura = rs.getDate("data_obertura");
+                compte.data_cancelacio = rs.getDate("data_cancelacio");
+                compte.saldo = rs.getInt("saldo");
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.print("Error de connexió");
         } finally {
             statement.close();
@@ -55,16 +63,40 @@ public class CompteBBDD {
         
     }
     
-    public boolean verificarCompteBBDD(String NIF, String numCompte) throws Exception{
-        
-        //Verificar que el compte és del NIF:
-        
-        return false;
+    public static boolean verificarCompteBBDD(String NIF, String numCompte) throws Exception{
+    	CallableStatement statement = null;//
+    	ResultSet rs = null;
+    	boolean verificacio = false;
+        try {
+        	Connection conexio = BBDD.getConnexio();
+        	statement = conexio.prepareCall("{? = call verificarCompte(?, ?)}");
+            statement.registerOutParameter(1, Types.BOOLEAN);
+			statement.setString(2, NIF);
+			statement.setString(3, numCompte);
+			rs = statement.executeQuery();
+			rs.next();
+			verificacio = rs.getBoolean(1);
+		}catch(SQLException e){
+			System.out.println("Error sql: "+e.getMessage()); //
+		} finally {
+			statement.close();
+        }
+        return verificacio;
 
     }
     
-    public void cancelarCompteBBDD(String numCompte) throws Exception {
-        
+    public static void cancelarCompteBBDD(String numCompte) throws Exception {
+        PreparedStatement statement = null;
+        try {
+            conn = BBDD.getConnexio();
+            statement = conn.prepareCall("{call cancelarCompte(?)}");
+            statement.setString(1, numCompte);
+            statement.execute();
+        }catch(SQLException e){
+            System.out.println("Error sql: "+e.getMessage());
+        } finally {
+            statement.close();
+        }
     }
     
     public void disminuir_saldoBBDD(String numCompte,String Quantitat)throws Exception{

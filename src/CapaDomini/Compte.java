@@ -15,6 +15,11 @@ public class Compte {
 
     public Compte(String numCompte,int quantitat,Date data_obertura){
         this.numCompte = numCompte;
+        this.saldo = quantitat;
+        this.data_obertura = data_obertura;
+    }
+    
+    public Compte(String numCompte,int quantitat,Date data_obertura,Date data_cancelacio){
         this.data_obertura = data_obertura;
         saldo = quantitat;
     }
@@ -60,10 +65,25 @@ public class Compte {
     }
 
     public boolean estasCancelat(){
-        
+        if(data_cancelacio == null) {
+        	return false;
+        }
         return true;
     }
     
+    public int getSaldo(){
+        
+        return -1;
+    }
+
+    @Override
+    public String toString() {
+        return "Compte{" +
+                "numCompte='" + numCompte + '\'' +
+                ", data_obertura=" + data_obertura +
+                ", data_cancelacio=" + data_cancelacio +
+                ", saldo=" + saldo +
+                '}';
     public String toString(){
         
         return null;
