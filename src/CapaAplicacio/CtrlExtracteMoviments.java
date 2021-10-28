@@ -9,8 +9,8 @@ public class CtrlExtracteMoviments {
     public FacanaBBDD facana;
     
     public CtrlExtracteMoviments() throws Exception{
-        
-        //Crear nova Façana:
+
+        facana = new FacanaBBDD();
         
     }
     
@@ -18,7 +18,8 @@ public class CtrlExtracteMoviments {
         
         //Verificar camps no nulls:
       
-        //Verificar si existeix el Compte:
+        //Verificar si existeix el Compte
+
             
             return null;
     }
