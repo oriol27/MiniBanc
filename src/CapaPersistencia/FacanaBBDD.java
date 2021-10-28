@@ -32,13 +32,11 @@ public class FacanaBBDD {
     }
     
     public void cancelarCompte(String numCompte) throws Exception{
-        
+        compteBBDD.cancelarCompteBBDD(numCompte);
     }
     
     public boolean verificarCompte(String NIF,String numCompte) throws Exception{
-        
-        return false;
-        
+        return compteBBDD.verificarCompteBBDD(NIF, numCompte);
     }
     
     public void introMoviment(String numCompte, Moviment m) throws Exception{
@@ -77,5 +75,21 @@ public class FacanaBBDD {
 
     public Connection getConnexio () throws Exception {
         return bbdd.getConnexio();
+    }
+
+
+    public static boolean comprovaLletraNIF(String NIF) {
+        int DNI = Integer.parseInt((NIF.substring(0,8)));
+        int resta = 0;
+        String lletra = "";
+        String[] asignacio = {"T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E"};
+        resta = DNI%23;
+        lletra = asignacio[resta];
+
+        String ultimaLletra = NIF.substring(NIF.length() - 1);
+        if(ultimaLletra!=lletra){
+            return false;
+        }
+        return true;
     }
 }
