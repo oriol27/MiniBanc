@@ -14,12 +14,17 @@ public class FacanaBBDD {
     private BBDD bbdd;
     
     public FacanaBBDD() throws Exception{
-        
+        compteBBDD = new CompteBBDD();
+        clientBBDD = new ClientBBDD();
+        movimentBBDD = new MovimentBBDD();
+       bbdd = new BBDD();
     }
     
     public synchronized static FacanaBBDD getInstancia() throws Exception{
-        
-        return null;
+        if (instancia == null){
+            instancia = new FacanaBBDD();
+        }
+        return instancia;
     }
     
     public void disminuir_saldo(String numCompte,String Quantitat)throws Exception{
@@ -42,25 +47,19 @@ public class FacanaBBDD {
     }
 
     public Compte existeixCompte(String numCompte)throws Exception{
-        
-        return null;
-        
+        return compteBBDD.existeixCompteBBDD(numCompte);
     }
     
     public boolean existeixClient(String NIF)throws Exception{
-        
-        return false;
-      
+       return clientBBDD.existeixClientBBDD(NIF);
     }
     
     public void introClient(String NIF,String Nom)throws Exception{
-        
+        clientBBDD.introClientBBDD(NIF, Nom);
     }
     
-    public int introCompte(String NIF)throws Exception{
-       
-        return -1;
-        
+    public String introCompte(String NIF)throws Exception{
+       return compteBBDD.introCompteBBDD(NIF);
     }
     
     public void augmentarSaldo(String numCompte,int quantitat_final)throws Exception {
@@ -73,14 +72,10 @@ public class FacanaBBDD {
     }
     
     public ArrayList<Moviment> FerExtracte(String numCompte,String data)throws Exception{
-        
         return null;
     }
-    
-    public Connection getConnexio()throws Exception{
-  
-         return null;
-  
+
+    public Connection getConnexio () throws Exception {
+        return bbdd.getConnexio();
     }
-   
 }

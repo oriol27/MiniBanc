@@ -1,9 +1,5 @@
 package CapaPersistencia;
-
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.*;
-import java.util.Properties;
 
 public class BBDD {
 
@@ -11,7 +7,18 @@ public class BBDD {
     private final String DNS = "MiniBanc";
     private static BBDD instancia;
     
-    public BBDD() {
+    public BBDD() throws ClassNotFoundException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+    }
+
+    public synchronized static BBDD getInstacia () throws Exception {
+        if (connexio == null){
+            instancia = new BBDD();
+        }
+        return instancia;
+    }
+
+    public Connection getConnexio () throws Exception {
         String url = "jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11446603";
         String driver = "com.mysql.cj.jdbc.Driver";
         String usuario = "sql11446603";
@@ -25,18 +32,6 @@ public class BBDD {
         catch(ClassNotFoundException | SQLException e){
             e.printStackTrace();
         }
-    }
-    
-    public synchronized static BBDD getInstacia () throws Exception {
-        if (connexio == null){
-            instancia = new BBDD();
-            System.out.println("Entra a crear BBDD");
-        }
-        return instancia;
-    }
-
-    public static Connection getConnexio () throws Exception {
-            getInstacia();
-            return connexio;
+        return connexio;
     }
 }
