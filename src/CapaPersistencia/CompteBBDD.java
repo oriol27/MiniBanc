@@ -28,6 +28,7 @@ public class CompteBBDD {
             statement.setString(1, numCompte);
             ResultSet rs = statement.executeQuery();
 
+
             if (rs.next()) {
                 System.out.println(rs.getString("data_obertura"));
                 compte.numCompte = rs.getString("numCompte");
@@ -57,6 +58,7 @@ public class CompteBBDD {
         }
         return numCompte;
     }
+
 
     public void augmentarSaldoBBDD(String numCompte, int quantitat_final) throws Exception {
         try {
@@ -100,6 +102,7 @@ public class CompteBBDD {
             statement = conn.prepareCall("{call cancelarCompte(?)}");
             statement.setString(1, numCompte);
             statement.execute();
+
         } catch (SQLException e) {
             System.out.println("Error sql: " + e.getMessage());
         } finally {
