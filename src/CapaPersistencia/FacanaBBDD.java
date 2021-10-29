@@ -93,4 +93,8 @@ public class FacanaBBDD {
     public boolean compteCancelat(String NIF, String numCompte) {
         return compteBBDD.compteCancelat(NIF, numCompte);
     }
+
+    public boolean quantitatMenorSaldo(String numCompte, int quantitat) {
+        return compteBBDD.quantitatMenorSaldo(numCompte, quantitat);
+    }
 }

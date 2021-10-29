@@ -51,13 +51,13 @@ public class CtrlReintegrament {
         }
 
         //Verificar que la quantitat a reintegrar no és superior al saldo existent en el compte:
-
+        facana.quantitatMenorSaldo(numCompte, Integer.parseInt(Quantitat));
 
         //Verificar que el compte pertany al NIF:
 
 
         //Disminuir saldo:
-
+        facana.disminuir_saldo(numCompte, Quantitat);
 
         //Enregistrar moviment de reintegració:
     }
