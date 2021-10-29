@@ -80,16 +80,17 @@ public class FacanaBBDD {
 
     public static boolean comprovaLletraNIF(String NIF) {
         int DNI = Integer.parseInt((NIF.substring(0,8)));
-        int resta = 0;
-        String lletra = "";
         String[] asignacio = {"T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E"};
-        resta = DNI%23;
-        lletra = asignacio[resta];
+        String lletra = asignacio[DNI%23];
 
         String ultimaLletra = NIF.substring(NIF.length() - 1);
-        if(ultimaLletra!=lletra){
+        if(!ultimaLletra.equals(lletra)){
             return false;
         }
         return true;
+    }
+
+    public boolean compteCancelat(String NIF, String numCompte) {
+        return compteBBDD.compteCancelat(NIF, numCompte);
     }
 }

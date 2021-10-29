@@ -15,20 +15,20 @@ import java.util.Date;
 public class CompteBBDD {
     private static Connection conn = null;
 
-    public CompteBBDD(){
-        
+    public CompteBBDD() {
+
     }
-    
-    public Compte existeixCompteBBDD(String numCompte)throws Exception{
+
+    public Compte existeixCompteBBDD(String numCompte) throws Exception {
         PreparedStatement statement = null;
         Compte compte = new Compte();
-        try (Connection conn = BBDD.getInstacia().getConnexio()){
+        try (Connection conn = BBDD.getInstacia().getConnexio()) {
 
             statement = conn.prepareCall("{call dadesCompte(?)}");
             statement.setString(1, numCompte);
             ResultSet rs = statement.executeQuery();
 
-            if (rs.next()){
+            if (rs.next()) {
                 System.out.println(rs.getString("data_obertura"));
                 compte.numCompte = rs.getString("numCompte");
                 compte.data_obertura = rs.getDate("data_obertura");
@@ -42,55 +42,57 @@ public class CompteBBDD {
         }
         return compte;
     }
-    
-    public String introCompteBBDD(String NIF) throws Exception{
+
+    public String introCompteBBDD(String NIF) throws Exception {
         String numCompte = "";
         try (Connection conn = BBDD.getInstacia().getConnexio();
-             CallableStatement cs = conn.prepareCall("{? = call createCompte(?)}");){
+             CallableStatement cs = conn.prepareCall("{? = call createCompte(?)}");) {
             cs.registerOutParameter(1, Types.VARCHAR);
             cs.setString(2, NIF);
             cs.execute();
             numCompte = cs.getString(1);
 
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return numCompte;
     }
-    
-    public void augmentarSaldoBBDD(String numCompte,int quantitat_final)throws Exception{
-    	try {
-	    	String sql = "Update sql11446603.Compte set saldo=? where numCompte=?";
-	    	Connection conne = BBDD.getConnexio();
-	    	PreparedStatement ps=conne.prepareStatement(sql);
-	    	ps.setInt(1,quantitat_final);
-	    	ps.setString(2,numCompte);
-	    	ps.executeUpdate();
-    	}catch(SQLException e){e.printStackTrace();}
-    }
-    
-    public boolean verificarCompteBBDD(String NIF, String numCompte) throws Exception{
-    	CallableStatement statement = null;//
-    	ResultSet rs = null;
-    	boolean verificacio = false;
+
+    public void augmentarSaldoBBDD(String numCompte, int quantitat_final) throws Exception {
         try {
-        	Connection conexio = BBDD.getConnexio();
-        	statement = conexio.prepareCall("{? = call verificarCompte(?, ?)}");
+            String sql = "Update sql11446603.Compte set saldo=? where numCompte=?";
+            Connection conne = BBDD.getConnexio();
+            PreparedStatement ps = conne.prepareStatement(sql);
+            ps.setInt(1, quantitat_final);
+            ps.setString(2, numCompte);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean verificarCompteBBDD(String NIF, String numCompte) throws Exception {
+        CallableStatement statement = null;//
+        ResultSet rs = null;
+        boolean verificacio = false;
+        try {
+            Connection conexio = BBDD.getConnexio();
+            statement = conexio.prepareCall("{? = call verificarCompte(?, ?)}");
             statement.registerOutParameter(1, Types.BOOLEAN);
-			statement.setString(2, NIF);
-			statement.setString(3, numCompte);
-			rs = statement.executeQuery();
-			rs.next();
-			verificacio = rs.getBoolean(1);
-		}catch(SQLException e){
-			System.out.println("Error sql: "+e.getMessage()); //
-		} finally {
-			statement.close();
+            statement.setString(2, NIF);
+            statement.setString(3, numCompte);
+            rs = statement.executeQuery();
+            rs.next();
+            verificacio = rs.getBoolean(1);
+        } catch (SQLException e) {
+            System.out.println("Error sql: " + e.getMessage()); //
+        } finally {
+            statement.close();
         }
         return verificacio;
 
     }
-    
+
     public void cancelarCompteBBDD(String numCompte) throws Exception {
         PreparedStatement statement = null;
         try {
@@ -98,26 +100,41 @@ public class CompteBBDD {
             statement = conn.prepareCall("{call cancelarCompte(?)}");
             statement.setString(1, numCompte);
             statement.execute();
-        }catch(SQLException e){
-            System.out.println("Error sql: "+e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Error sql: " + e.getMessage());
         } finally {
             statement.close();
         }
     }
-    
-    public void disminuir_saldoBBDD(String numCompte,String Quantitat)throws Exception{
-        
+
+    public void disminuir_saldoBBDD(String numCompte, String Quantitat) throws Exception {
+
     }
-    
-    public ArrayList<Compte> Llistar_Comptes(String NIF)throws Exception{
+
+    public ArrayList<Compte> Llistar_Comptes(String NIF) throws Exception {
         ArrayList<Compte> compte = new ArrayList<Compte>();
         try (Connection conn = BBDD.getInstacia().getConnexio();
-             PreparedStatement pstmt = conn.prepareStatement("select * from Compte where dni='"+NIF+"'");) {
+             PreparedStatement pstmt = conn.prepareStatement("select * from sql11446603.Compte where dni='" + NIF + "'");) {
             ResultSet rs = pstmt.executeQuery();
-            Compte compte_selecionat = new Compte(rs.getString(1), Integer.parseInt(rs.getString(4)) ,rs.getDate(2),rs.getDate(3));
+            Compte compte_selecionat = new Compte(rs.getString(1), Integer.parseInt(rs.getString(4)), rs.getDate(2), rs.getDate(3));
             compte.add(compte_selecionat);
             return compte;
         }
     }
-    
+
+    public boolean compteCancelat(String NIF, String numCompte) {
+        try (Connection conn = BBDD.getInstacia().getConnexio();
+             PreparedStatement pstmt = conn.prepareStatement("select * from sql11446603.Compte where dni='" + NIF + "' and numCompte='" + numCompte + "'");) {
+            ResultSet rs = pstmt.executeQuery();
+            Compte compteSelecionat = new Compte(rs.getString(1), Integer.parseInt(rs.getString(4)), rs.getDate(2), rs.getDate(3));
+            if (compteSelecionat.data_cancelacio != null) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

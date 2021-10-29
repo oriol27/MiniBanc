@@ -22,7 +22,7 @@ public class CtrlCancelarCompte {
     	if(NIF.isEmpty() || numCompte.isEmpty()) { //Comprova si hi ha valors nulls
 			System.out.println("Hi ha valors nulls");
 			
-		}else if(!NIF.matches("^\\d{1}[A-Z]{8}")) { //Comprova si el NIF esta en fomrat de DNI
+		}else if(!NIF.matches("\\d{8}[A-HJ-NP-TV-Z]")) { //Comprova si el NIF esta en fomrat de DNI
 			System.out.println("El NIF no est� ben escrit");
 		}else {
 			Compte compte = facana.existeixCompte(numCompte); //Comprova si la compta existeix, si es aixi la retorna
