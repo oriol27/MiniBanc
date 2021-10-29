@@ -108,16 +108,18 @@ public class CompteBBDD {
     }
 
     public void disminuir_saldoBBDD(String numCompte, String Quantitat) throws Exception {
-        String sql = "Select * From Compte Where num_compte = ? ;";
+        String sql = "Select * From Compte Where numCompte = ? ;";
         PreparedStatement pst = BBDD.getInstacia().getConnexio().prepareStatement(sql);
         pst.setString(1, numCompte);
         ResultSet rs = pst.executeQuery();
         if (rs.next()) {
-            int s = rs.getInt("saldo");
-            int quantitat_final = s - new Integer(Quantitat);
-            String q = String.valueOf(quantitat_final);
-            String sqll = "UPDATE Compte SET Compte.saldo=" + q + " WHERE num_compte=" + numCompte + "";
+            int s = (int) rs.getInt("saldo");
+            double quantitat_final = (s - Integer.parseInt(Quantitat));
+            //String q = String.valueOf(quantitat_final);
+            String sqll = "UPDATE Compte SET saldo= ? WHERE numCompte= ?";
             pst = BBDD.getInstacia().getConnexio().prepareStatement(sqll);
+            pst.setDouble(1, quantitat_final);
+            pst.setString(2, numCompte);
             pst.executeUpdate();
         }
 
@@ -141,7 +143,7 @@ public class CompteBBDD {
             ResultSet rs = pstmt.executeQuery();
             rs.next();
             Compte compteSelecionat = new Compte(rs.getString(1), (int) Double.parseDouble(rs.getString(4)), rs.getDate(2), rs.getDate(3));
-            if (!compteSelecionat.data_cancelacio.toString().isEmpty() || !compteSelecionat.data_cancelacio.toString().isBlank() || compteSelecionat.data_cancelacio.toString() != null) {
+            if (compteSelecionat.data_cancelacio == null) {
                 return true;
             } else {
                 return false;
@@ -160,6 +162,23 @@ public class CompteBBDD {
             rs.next();
             Compte compteSelecionat = new Compte(rs.getString(1), (int) Double.parseDouble(rs.getString(4)), rs.getDate(2), rs.getDate(3));
             if (quantitat < compteSelecionat.saldo) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean nifNumCompte(String NIF, String numCompte) {
+        try (Connection conn = BBDD.getInstacia().getConnexio();
+             PreparedStatement pstmt = conn.prepareStatement("select * from sql11446603.Compte where numCompte='" + numCompte + "'");) {
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            if (NIF.equals(rs.getString(5))) {
                 return true;
             } else {
                 return false;
