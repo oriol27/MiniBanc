@@ -14,12 +14,14 @@ public class Compte {
         this.saldo = quantitat;
         this.data_obertura = data_obertura;
     }
-    
-    public Compte(String numCompte, int quantitat, Date data_obertura, Date data_cancelacio){
+
+    public Compte(String numCompte,int quantitat,Date data_obertura,Date data_cancelacio){
+
         this.numCompte = numCompte;
         this.saldo = quantitat;
         this.data_obertura = data_obertura;
         this.data_cancelacio = data_cancelacio;
+
     }
     
     public void setNumCompte(String numCompte){

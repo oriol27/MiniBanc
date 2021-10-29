@@ -46,18 +46,22 @@ public class CtrlReintegrament {
         }
 
         //Verificar que el compte no està cancel·lat:
-        if (facana.compteCancelat(NIF, numCompte)) {
+        if (!facana.compteCancelat(NIF, numCompte)) {
             throw new IllegalArgumentException("Aquest compte està cancel·lat");
         }
 
         //Verificar que la quantitat a reintegrar no és superior al saldo existent en el compte:
-
+        if (!facana.quantitatMenorSaldo(numCompte, Integer.parseInt(Quantitat))) {
+            throw new IllegalArgumentException("No disposes de saldo suficient per realitzar la operació");
+        }
 
         //Verificar que el compte pertany al NIF:
-
+        if (!facana.nifNumCompte(NIF, numCompte)) {
+            throw new IllegalArgumentException("El NIF no es correspon amb el número de compte");
+        }
 
         //Disminuir saldo:
-
+        facana.disminuir_saldo(numCompte, Quantitat);
 
         //Enregistrar moviment de reintegració:
     }

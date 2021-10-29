@@ -28,7 +28,7 @@ public class FacanaBBDD {
     }
     
     public void disminuir_saldo(String numCompte,String Quantitat)throws Exception{
-        
+        compteBBDD.disminuir_saldoBBDD(numCompte, Quantitat);
     }
     
     public void cancelarCompte(String numCompte) throws Exception{
@@ -92,5 +92,13 @@ public class FacanaBBDD {
 
     public boolean compteCancelat(String NIF, String numCompte) {
         return compteBBDD.compteCancelat(NIF, numCompte);
+    }
+
+    public boolean quantitatMenorSaldo(String numCompte, int quantitat) {
+        return compteBBDD.quantitatMenorSaldo(numCompte, quantitat);
+    }
+
+    public boolean nifNumCompte(String NIF, String numCompte) {
+        return compteBBDD.nifNumCompte(NIF, numCompte);
     }
 }
