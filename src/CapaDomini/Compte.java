@@ -4,47 +4,51 @@ import java.util.Date;
 
 public class Compte {
 
-    public int numCompte;
+    public String numCompte;
     public Date data_obertura;
     public Date data_cancelacio;
     public int saldo;
     
-    public Compte(int numCompte,int quantitat,Date data_obertura){
-        
+    public Compte(String numCompte, int quantitat, Date data_obertura){
+        this.numCompte = numCompte;
+        this.saldo = quantitat;
+        this.data_obertura = data_obertura;
     }
     
-    public Compte(int numCompte,int quantitat,Date data_obertura,Date data_cancelacio){
-        
+    public Compte(String numCompte, int quantitat, Date data_obertura, Date data_cancelacio){
+        this.numCompte = numCompte;
+        this.saldo = quantitat;
+        this.data_obertura = data_obertura;
+        this.data_cancelacio = data_cancelacio;
     }
     
-    public void setNumCompte(int numCompte){
-
+    public void setNumCompte(String numCompte){
+        this.numCompte = numCompte;
     }
     
     public void setDataObertura(Date data_obertura){
-        
+        this.data_obertura = data_obertura;
     }
     
     public void setDataCancelacio(Date data_cancelacio){
-        
+        this.data_cancelacio = data_cancelacio;
     }
     
     public void setSaldo(int saldo){
-        
+        this.saldo = saldo;
     }
     
     public boolean estasCancelat(){
         
-        return true;
+        return this.data_cancelacio != null;;
     }
     
     public int getSaldo(){
         
-        return -1;
+        return this.saldo;;
     }
     
     public String toString(){
-        
-        return null;
+        return this.data_cancelacio == null ? "Número de Compte: " + this.numCompte + " Data d'obertura: " + this.data_obertura + " Saldo: " + this.saldo : "Número de Compte: " + this.numCompte + " Data d'obertura: " + this.data_obertura + " Data de Cancel·lació: " + this.data_cancelacio + " Saldo: " + this.saldo;
     }
 }

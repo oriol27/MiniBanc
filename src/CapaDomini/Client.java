@@ -6,6 +6,7 @@ public class Client {
     private String nom;
     
     public Client(String dni, String nom){
-
+        this.dni = dni;
+        this.nom = nom;
     }
 }

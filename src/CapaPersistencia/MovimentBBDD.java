@@ -18,7 +18,7 @@ public class MovimentBBDD {
     
     public void introMovimentBBDD(String numCompte, Moviment m)throws Exception{
         try(Connection conn = BBDD.getConnexio();
-            CallableStatement pst = conn.prepareCall("{? = call createMoviment(?)}");){
+            PreparedStatement pst = conn.prepareStatement("INSERT INTO Moviment (quantitat,tipus,num_compte) VALUES (?,?,?);")){
             pst.setInt(1, m.getQuantitat());
             pst.setInt(2, m.getTipus());
             pst.setString(3, numCompte);
@@ -33,7 +33,7 @@ public class MovimentBBDD {
 
             Connection conn = BBDD.getConnexio();
             ResultSet rs;
-            try (PreparedStatement pst = conn.prepareCall("{call extractMoviment(?)}")) {
+            try (PreparedStatement pst = conn.prepareStatement("Select * From Moviment Where num_compte = ? ;")) {
                 pst.setString(1, numCompte);
                 rs = pst.executeQuery();
             ArrayList moviments = new ArrayList();
