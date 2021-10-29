@@ -41,14 +41,43 @@ public class Compte {
     public boolean estasCancelat(){
         
         return this.data_cancelacio != null;;
+
     }
-    
     public int getSaldo(){
-        
-        return this.saldo;;
+
+        return -1;
     }
-    
-    public String toString(){
-        return this.data_cancelacio == null ? "Número de Compte: " + this.numCompte + " Data d'obertura: " + this.data_obertura + " Saldo: " + this.saldo : "Número de Compte: " + this.numCompte + " Data d'obertura: " + this.data_obertura + " Data de Cancel·lació: " + this.data_cancelacio + " Saldo: " + this.saldo;
+
+    public void setNumCompte(String numCompte) {
+        this.numCompte = numCompte;
+    }
+
+    public void setData_obertura(Date data_obertura) {
+        this.data_obertura = data_obertura;
+    }
+
+    public void setData_cancelacio(Date data_cancelacio) {
+        this.data_cancelacio = data_cancelacio;
+    }
+
+    public void setSaldo(int saldo) {
+        this.saldo = saldo;
+    }
+
+    public boolean estasCancelat(){
+        if(data_cancelacio == null) {
+        	return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Compte{" +
+                "numCompte='" + numCompte + '\'' +
+                ", data_obertura=" + data_obertura +
+                ", data_cancelacio=" + data_cancelacio +
+                ", saldo=" + saldo +
+                '}';
     }
 }

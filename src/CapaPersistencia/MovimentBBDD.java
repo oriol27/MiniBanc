@@ -2,7 +2,9 @@ package CapaPersistencia;
 
 import CapaDomini.Moviment;
 
+
 import java.sql.*;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,12 +12,11 @@ import java.util.Date;
 
 public class MovimentBBDD {
 
-    
     public MovimentBBDD(){
-        
-        
+
+
     }
-    
+
     public void introMovimentBBDD(String numCompte, Moviment m)throws Exception{
         try(Connection conn = BBDD.getConnexio();
             PreparedStatement pst = conn.prepareStatement("INSERT INTO Moviment (quantitat,tipus,num_compte) VALUES (?,?,?);")){
@@ -28,14 +29,14 @@ public class MovimentBBDD {
         }
 
     }
-    
+
     public ArrayList<Moviment> FerExtracte(String numCompte,String data)throws Exception{
 
-            Connection conn = BBDD.getConnexio();
-            ResultSet rs;
-            try (PreparedStatement pst = conn.prepareStatement("Select * From Moviment Where num_compte = ? ;")) {
-                pst.setString(1, numCompte);
-                rs = pst.executeQuery();
+        Connection conn = BBDD.getConnexio();
+        ResultSet rs;
+        try (PreparedStatement pst = conn.prepareStatement("Select * From Moviment Where num_compte = ? ;")) {
+            pst.setString(1, numCompte);
+            rs = pst.executeQuery();
             ArrayList moviments = new ArrayList();
             SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
             Date d = date.parse(data);
@@ -50,7 +51,6 @@ public class MovimentBBDD {
             e.printStackTrace();
         }
 
-       
         return null;
     }
 }
