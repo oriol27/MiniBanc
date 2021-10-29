@@ -107,8 +107,21 @@ public class CompteBBDD {
         }
     }
 
-    public void disminuir_saldoBBDD(String numCompte, String Quantitat) throws Exception {
+    public void disminuir_saldoBBDD(String numCompte,String Quantitat)throws Exception{
+        String sql = "Select * From Compte Where num_compte = ? ;";
+        PreparedStatement pst = BBDD.getInstacia().getConnexio().prepareStatement(sql);
+        pst.setString(1, numCompte);
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()) {
+            int s = rs.getInt("saldo");
+            int quantitat_final = s - new Integer(Quantitat);
+            String q = String.valueOf(quantitat_final);
+            String sqll = "UPDATE Compte SET Compte.saldo=" + q + " WHERE num_compte=" + numCompte + "";
+            pst = BBDD.getInstacia().getConnexio().prepareStatement(sqll);
+            pst.executeUpdate();
+        }
 
+        pst.close();
     }
 
     public ArrayList<Compte> Llistar_Comptes(String NIF) throws Exception {
