@@ -1,5 +1,6 @@
 package CapaAplicacio;
 
+import CapaDomini.Compte;
 import CapaPersistencia.*;
 
 public class CtrlReintegrament {
@@ -33,10 +34,21 @@ public class CtrlReintegrament {
         }
 
         //Verificar que existeix el compte:
-
+        Compte compte = facana.existeixCompte(numCompte);
+        String compteNull = "Compte{" +
+                "numCompte='" + null + '\'' +
+                ", data_obertura=" + null +
+                ", data_cancelacio=" + null +
+                ", saldo=" + 0 +
+                '}';
+        if(compte.toString().equals(compteNull)){
+            throw new IllegalArgumentException("Aquest compte no existeix");
+        }
 
         //Verificar que el compte no està cancel·lat:
-
+        if (facana.compteCancelat(NIF, numCompte)) {
+            throw new IllegalArgumentException("Aquest compte està cancel·lat");
+        }
 
         //Verificar que la quantitat a reintegrar no és superior al saldo existent en el compte:
 
