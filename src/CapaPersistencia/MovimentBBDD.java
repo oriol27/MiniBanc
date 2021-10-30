@@ -18,11 +18,18 @@ public class MovimentBBDD {
     }
 
     public void introMovimentBBDD(String numCompte, Moviment m)throws Exception{
+        java.util.Date dt = new java.util.Date();
+
+        java.text.SimpleDateFormat sdf =
+                new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        String currentTime = sdf.format(dt);
         try(Connection conn = BBDD.getConnexio();
-            PreparedStatement pst = conn.prepareStatement("INSERT INTO Moviment (quantitat,tipus,num_compte) VALUES (?,?,?);")){
+            PreparedStatement pst = conn.prepareStatement("INSERT INTO Moviment (quantitat,tipus,numCompte, data) VALUES (?,?,?,?);")){
             pst.setInt(1, m.getQuantitat());
             pst.setInt(2, m.getTipus());
             pst.setString(3, numCompte);
+            pst.setString(4, currentTime);
             pst.execute();
         } catch (SQLException e){
             e.printStackTrace();

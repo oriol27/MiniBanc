@@ -1,6 +1,7 @@
 package CapaAplicacio;
 
 import CapaDomini.Compte;
+import CapaDomini.Moviment;
 import CapaPersistencia.*;
 
 public class CtrlReintegrament {
@@ -64,5 +65,7 @@ public class CtrlReintegrament {
         facana.disminuir_saldo(numCompte, Quantitat);
 
         //Enregistrar moviment de reintegració:
+        Moviment m = new Moviment(-1, Integer.parseInt(Quantitat));
+        facana.introMoviment(numCompte, m);
     }
 }
