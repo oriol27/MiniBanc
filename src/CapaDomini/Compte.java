@@ -8,6 +8,10 @@ public class Compte {
     public Date data_obertura;
     public Date data_cancelacio;
     public int saldo;
+
+    public Compte(){
+
+    }
     
     public Compte(String numCompte, int quantitat, Date data_obertura){
         this.numCompte = numCompte;
@@ -39,19 +43,10 @@ public class Compte {
     public void setSaldo(int saldo){
         this.saldo = saldo;
     }
-    
-    public boolean estasCancelat(){
-        
-        return this.data_cancelacio != null;;
 
-    }
     public int getSaldo(){
 
         return -1;
-    }
-
-    public void setNumCompte(String numCompte) {
-        this.numCompte = numCompte;
     }
 
     public void setData_obertura(Date data_obertura) {
@@ -60,10 +55,6 @@ public class Compte {
 
     public void setData_cancelacio(Date data_cancelacio) {
         this.data_cancelacio = data_cancelacio;
-    }
-
-    public void setSaldo(int saldo) {
-        this.saldo = saldo;
     }
 
     public boolean estasCancelat(){
