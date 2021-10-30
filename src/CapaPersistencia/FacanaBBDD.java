@@ -40,8 +40,7 @@ public class FacanaBBDD {
     }
     
     public void introMoviment(String numCompte, Moviment m) throws Exception{
-        
-        
+        movimentBBDD.introMovimentBBDD(numCompte, m);
     }
 
     public Compte existeixCompte(String numCompte)throws Exception{
