@@ -61,7 +61,7 @@ public class CompteBBDD {
 
     public void augmentarSaldoBBDD(String numCompte,int quantitat_final)throws Exception{
     	try {
-	    	String sql = "Update compte set saldo= ? where numCompte= ?";
+	    	String sql = "Update Compte set saldo= ? where numCompte= ?";
 	    	Connection conne = BBDD.getInstacia().getConnexio();
 	    	PreparedStatement ps=conne.prepareStatement(sql);
 	    	ps.setInt(1,quantitat_final);
