@@ -47,7 +47,7 @@ public class CtrlReintegrament {
         }
 
         //Verificar que el compte no està cancel·lat:
-        if (!facana.compteCancelat(NIF, numCompte)) {
+        if (!facana.compteCancelat(numCompte)) {
             throw new IllegalArgumentException("Aquest compte està cancel·lat");
         }
 

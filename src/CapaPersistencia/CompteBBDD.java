@@ -137,9 +137,9 @@ public class CompteBBDD {
         }
     }
 
-    public boolean compteCancelat(String NIF, String numCompte) {
+    public boolean compteCancelat(String numCompte) {
         try (Connection conn = BBDD.getInstacia().getConnexio();
-             PreparedStatement pstmt = conn.prepareStatement("select * from sql11446603.Compte where dni='" + NIF + "' and numCompte='" + numCompte + "'");) {
+             PreparedStatement pstmt = conn.prepareStatement("select * from sql11446603.Compte where numCompte='" + numCompte + "'");) {
             ResultSet rs = pstmt.executeQuery();
             rs.next();
             Compte compteSelecionat = new Compte(rs.getString(1), (int) Double.parseDouble(rs.getString(4)), rs.getDate(2), rs.getDate(3));

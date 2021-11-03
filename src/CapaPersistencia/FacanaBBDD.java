@@ -87,8 +87,8 @@ public class FacanaBBDD {
         return ultimaLletra.equals(lletra);
     }
 
-    public boolean compteCancelat(String NIF, String numCompte) {
-        return compteBBDD.compteCancelat(NIF, numCompte);
+    public boolean compteCancelat(String numCompte) {
+        return compteBBDD.compteCancelat(numCompte);
     }
 
     public boolean quantitatMenorSaldo(String numCompte, int quantitat) {
