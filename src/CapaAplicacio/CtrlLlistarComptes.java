@@ -10,21 +10,19 @@ public class CtrlLlistarComptes {
     
     public CtrlLlistarComptes() throws Exception{
         
-        //Crear nova Façana:
+       facana = new FacanaBBDD();
         
     }
     
     public String[] Llistar_Comptes(String NIF)throws Exception{
-        
-        
+
         //Verificar camps no nulls:
    
 
         //Verificar lletra del NIF
             
             
-        //Recuperar comptes del NIF: 
-         
+        //Recuperar comptes del NIF
             
             return null;
  

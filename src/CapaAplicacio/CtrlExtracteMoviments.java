@@ -9,9 +9,7 @@ public class CtrlExtracteMoviments {
     public FacanaBBDD facana;
     
     public CtrlExtracteMoviments() throws Exception{
-
         facana = new FacanaBBDD();
-        
     }
     
     public String[] FerExtracte(String numCompte,String data) throws Exception{
@@ -19,8 +17,7 @@ public class CtrlExtracteMoviments {
         //Verificar camps no nulls:
       
         //Verificar si existeix el Compte
-
             
-            return null;
+        return null;
     }
 }

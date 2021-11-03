@@ -30,7 +30,7 @@ public class CtrlReintegrament {
         }
 
         //Verificar lletra del NIF:
-        if (!FacanaBBDD.comprovaLletraNIF(NIF)) {
+        if (!facana.comprovaLletraNIF(NIF)) {
             throw new IllegalArgumentException("La lletra del dni no és vàlida");
         }
 

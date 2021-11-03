@@ -9,5 +9,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="swing-layout-1.0.4" level="project" />
     <orderEntry type="library" exported="" name="mysql-connector-java-8.0.25" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-8.0.251" level="project" />
+    <orderEntry type="library" name="swing-layout-1.0.41" level="project" />
   </component>
 </module>

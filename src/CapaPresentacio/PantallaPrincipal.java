@@ -800,9 +800,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         try{
            String res=this.ctrl_alta_compte.Alta_Compte(NIF_AltaCompte.getText(),Nom_AltaCompte.getText());
            JOptionPane.showMessageDialog(this, "Número del nou compte: "+res, "Número del nou compte", JOptionPane.INFORMATION_MESSAGE);
-        
         } catch (Exception ex){
-            
              JOptionPane.showMessageDialog(this, ex.getMessage(), "ERROR Introduccio parametres", JOptionPane.ERROR_MESSAGE);
         }
 
