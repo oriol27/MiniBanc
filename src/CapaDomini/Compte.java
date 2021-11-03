@@ -1,6 +1,7 @@
 package CapaDomini;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Compte {
 
@@ -72,5 +73,18 @@ public class Compte {
                 ", data_cancelacio=" + data_cancelacio +
                 ", saldo=" + saldo +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Compte)) return false;
+        Compte compte = (Compte) o;
+        return saldo == compte.saldo && Objects.equals(numCompte, compte.numCompte) && Objects.equals(data_obertura, compte.data_obertura) && Objects.equals(data_cancelacio, compte.data_cancelacio);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numCompte, data_obertura, data_cancelacio, saldo);
     }
 }
