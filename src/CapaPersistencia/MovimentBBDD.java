@@ -41,7 +41,7 @@ public class MovimentBBDD {
 
         Connection conn = BBDD.getConnexio();
         ResultSet rs;
-        try (PreparedStatement pst = conn.prepareStatement("Select * From Moviment Where num_compte = ? ;")) {
+        try (PreparedStatement pst = conn.prepareStatement("Select * From Moviment Where numCompte = ? ;")) {
             pst.setString(1, numCompte);
             rs = pst.executeQuery();
             ArrayList moviments = new ArrayList();
