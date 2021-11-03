@@ -15,9 +15,30 @@ public class CtrlExtracteMoviments {
     public String[] FerExtracte(String numCompte,String data) throws Exception{
         
         //Verificar camps no nulls:
-      
-        //Verificar si existeix el Compte
-            
+        if(numCompte.equals("")){
+            System.out.println("El numero de compte no pot estar buit");
+            throw new Exception();
+        }else if(data.equals("")){
+            System.out.println("La data no pot estar buit");
+            throw new Exception();
+        }
+        else if(data.equals("") && numCompte.equals("")){
+            System.out.println("El numero de compte i la data no poden estar buit");
+        }else{
+            //Verificar que existeix el compte:
+            Compte compte = facana.existeixCompte(numCompte);
+            String compteNull = "Compte{" +
+                    "numCompte='" + null + '\'' +
+                    ", data_obertura=" + null +
+                    ", data_cancelacio=" + null +
+                    ", saldo=" + 0 +
+                    '}';
+            if(compte.toString().equals(compteNull)){
+                throw new IllegalArgumentException("Aquest compte no existeix");
+            }else{
+               return null;
+            }
+        }
         return null;
     }
 }
