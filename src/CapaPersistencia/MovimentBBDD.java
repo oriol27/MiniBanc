@@ -41,10 +41,10 @@ public class MovimentBBDD {
 
         Connection conn = BBDD.getConnexio();
         ResultSet rs;
+        ArrayList moviments = new ArrayList();
         try (PreparedStatement pst = conn.prepareStatement("Select * From Moviment Where num_compte = ? ;")) {
             pst.setString(1, numCompte);
             rs = pst.executeQuery();
-            ArrayList moviments = new ArrayList();
             SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
             Date d = date.parse(data);
             while(rs.next()) {
@@ -58,6 +58,6 @@ public class MovimentBBDD {
             e.printStackTrace();
         }
 
-        return null;
+        return moviments;
     }
 }
