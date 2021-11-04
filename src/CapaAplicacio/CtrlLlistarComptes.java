@@ -7,30 +7,39 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class CtrlLlistarComptes {
 
     public FacanaBBDD facana;
-    
-    public CtrlLlistarComptes() throws Exception{
-        
-       facana = new FacanaBBDD();
-        
+
+    public CtrlLlistarComptes() throws Exception {
+
+        facana = new FacanaBBDD();
+
     }
-    
-    public String[] Llistar_Comptes(String NIF)throws Exception{
+
+    public String[] Llistar_Comptes(String NIF) throws Exception {
 
         //Verificar camps no nulls:
-        if(NIF.equals("")){
-            System.out.println("El NIF no pot estar buit");
+        if (NIF.equals("")) {
+            throw new IllegalArgumentException("El NIF no pot estar buit");
         }
         //Verificar lletra del NIF
         else if (!facana.comprovaLletraNIF(NIF)) {
-            System.out.println("El DNI no es correcta");
-        }else{
-            return null;
+            throw new IllegalArgumentException("La lletra del NIF no és correcte");
         }
-        return null;
+
+        ArrayList<Compte> lista = facana.Llistar_Comptes(NIF);
+        String[] llista_comptes =new String[lista.size()];
+
+
+        for(int i=0;i<lista.size();i++){
+            llista_comptes[i] = lista.get(i).numCompte;
+        }
+
+
+        return llista_comptes;
+        }
     }
-}

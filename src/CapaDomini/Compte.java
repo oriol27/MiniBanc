@@ -23,9 +23,9 @@ public class Compte {
     public Compte(String numCompte,int quantitat,Date data_obertura,Date data_cancelacio){
 
         this.numCompte = numCompte;
-        this.saldo = quantitat;
         this.data_obertura = data_obertura;
         this.data_cancelacio = data_cancelacio;
+        this.saldo = quantitat;
 
     }
     
