@@ -45,7 +45,7 @@ public class MovimentBBDD {
             pst.setString(1, numCompte);
             rs = pst.executeQuery();
             ArrayList moviments = new ArrayList();
-            SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
             Date d = date.parse(data);
             while(rs.next()) {
                 Date fecha = rs.getDate("data");
