@@ -130,7 +130,7 @@ public class CompteBBDD {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()){
                 System.out.println(rs.getString(1));
-                Compte compte_selecionat = new Compte(rs.getString(1), Integer.parseInt(rs.getString(4)) ,rs.getDate(2),rs.getDate(3));
+                Compte compte_selecionat = new Compte(rs.getString(1), rs.getInt(4) ,rs.getDate(2),rs.getDate(3));
                 compte.add(compte_selecionat);
             }
             return compte;

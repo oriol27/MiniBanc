@@ -35,10 +35,15 @@ public class CtrlExtracteMoviments {
                     '}';
             if(compte.toString().equals(compteNull)){
                 throw new IllegalArgumentException("Aquest compte no existeix");
-            }else{
-               return null;
             }
         }
-        return null;
+        ArrayList<Moviment> extract= facana.FerExtracte(numCompte,data);
+        String[] extracte= new String[extract.size()];
+
+
+        for(int i=0;i<extract.size();i++){
+            extracte[i] = extract.get(i).toString();
+        }
+        return extracte;
     }
 }
