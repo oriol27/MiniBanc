@@ -18,8 +18,7 @@ public class CtrlCancelarCompte {
     public void Cancelar_Compte(String NIF, String numCompte) throws Exception {
 
         if (NIF.isEmpty() || numCompte.isEmpty()) { //Comprova si hi ha valors nulls
-            System.out.println("Hi ha valors nulls");
-            throw new Exception();
+            throw new Exception("Cal omplir totes les dades");
         } else {
             Compte compte = facana.existeixCompte(numCompte); //Comprova si la compta existeix, si es aixi la retorna
             String compteNull = "Compte{" +
@@ -29,22 +28,16 @@ public class CtrlCancelarCompte {
                     ", saldo=" + 0 +
                     '}';
             if (compte.toString().equals(compteNull)) {
-                System.out.println("No existeix aquest compte");
-                throw new Exception();
+                throw new Exception("No existeix aquest compte");
+            } else if (!facana.verificarCompte(NIF, numCompte)) { //Comprova si la compta ja esta cancelada
+                throw new Exception("Aquest compte no pertany a aquesta persona");
+            } else if (compte.estasCancelat()) { //Verifica que la compta pertanyi a aquesta persona
+                throw new Exception("Aquest compte ja està cancel·lat");
             } else {
-                if (compte.estasCancelat()) { //Comprova si la compta ja esta cancelada
-                    System.out.println("Aquest compte ya està cancelat");
-                    throw new Exception();
-                } else {
-                    if (!facana.verificarCompte(NIF, numCompte)) { //Verifica que la compta pertanyi a aquesta persona
-                        System.out.println("Aquest compte no pertany a aquesta persona");
-                        throw new Exception();
-                    } else {
-                        facana.cancelarCompte(numCompte); //Si tot esta b�, es cancela la compte
-                    }
-                }
+                facana.cancelarCompte(numCompte); //Si tot esta b�, es cancela la compte
             }
         }
     }
 }
+
 
