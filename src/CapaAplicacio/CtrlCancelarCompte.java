@@ -29,9 +29,9 @@ public class CtrlCancelarCompte {
                     '}';
             if (compte.toString().equals(compteNull)) {
                 throw new Exception("No existeix aquest compte");
-            } else if (compte.estasCancelat()) { //Comprova si la compta ja esta cancelada
+            } else if (!facana.verificarCompte(NIF, numCompte)) { //Comprova si la compta ja esta cancelada
                 throw new Exception("Aquest compte no pertany a aquesta persona");
-            } else if (!facana.verificarCompte(NIF, numCompte)) { //Verifica que la compta pertanyi a aquesta persona
+            } else if (compte.estasCancelat()) { //Verifica que la compta pertanyi a aquesta persona
                 throw new Exception("Aquest compte ja està cancel·lat");
             } else {
                 facana.cancelarCompte(numCompte); //Si tot esta b�, es cancela la compte
