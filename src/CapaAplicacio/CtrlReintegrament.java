@@ -19,13 +19,13 @@ public class CtrlReintegrament {
 
 
         //Verificar camps no nulls:
-        if (NIF.isEmpty() || NIF == null || NIF.isBlank()) {
+        if (NIF.isEmpty() || NIF.isBlank()) {
             throw new IllegalArgumentException("El NIF no pot estar buit");
         }
-        if (numCompte.isEmpty() || numCompte == null || numCompte.isBlank()) {
+        if (numCompte.isEmpty() || numCompte.isBlank()) {
             throw new IllegalArgumentException("El número de compte no pot estar buit");
         }
-        if (Quantitat.isEmpty() || Quantitat == null || Quantitat.isBlank()) {
+        if (Quantitat.isEmpty() || Quantitat.isBlank()) {
             throw new IllegalArgumentException("La quantitat no pot estar buida");
         }
 
